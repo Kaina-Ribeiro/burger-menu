@@ -10,9 +10,22 @@ const config: Config = {
     extend: {
       colors: {
         primary: { DEFAULT: '#4F372F', dark: '#36231C' },
+        container: '#F8F9FA',
       },
       screens: {
-        content: '1024px',
+        desktop: '1024px',
+      },
+      height: {
+        '83': '1337px',
+        '9.125': '146px',
+        '67.9': '1071px',
+      },
+      maxWidth: {
+        xl: '600px',
+      },
+      fontSize: {
+        base: ['16px', '18.75px'],
+        '2xl': ['24px', '28.13px'],
       },
     },
   },
