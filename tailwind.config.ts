@@ -34,7 +34,8 @@ const config: Config = {
         '2xl': ['24px', '28.13px'],
       },
       boxShadow: {
-        sm: '0px 2px 14px 0px #00000024',
+        sm: '0px 2px 2px 0px #0000001F',
+        md: '0px 2px 14px 0px #00000024',
       },
     },
   },

@@ -6,6 +6,8 @@ import MenuItem from './MenuItem';
 import { IRestaurantMenu, IMenuSection } from '@/types/menu';
 import { IAppInfo } from '@/types/app-info';
 import { useState } from 'react';
+import Modal from '../Modal';
+import MenuOrderItem from './MenuOrderItem';
 
 interface MenuPanelProps {
   menu: IRestaurantMenu;
@@ -17,8 +19,12 @@ export default function MenuPanel({ menu, appInfo }: MenuPanelProps) {
     menu.sections?.[0],
   );
 
+  const openModal = () => {
+    return '';
+  };
+
   return (
-    <div className="flex flex-col bg-white max-w-xl w-full gap-14 shadow-sm py-5">
+    <div className="flex flex-col bg-white max-w-xl w-full gap-14 shadow-md py-5">
       <div className="px-4">
         <div className="flex gap-3">
           {menu.sections.map((section) => (
@@ -51,6 +57,7 @@ export default function MenuPanel({ menu, appInfo }: MenuPanelProps) {
                   style: 'currency',
                 })}
                 image={item?.images?.[0].image}
+                onClick={openModal}
               />
             ))}
           </div>

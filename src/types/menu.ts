@@ -13,6 +13,13 @@ export interface IMenuItem {
   available: boolean;
 }
 
+export interface IMenuItemProps
+  extends Pick<IMenuItem, 'name' | 'description' | 'modifiers'> {
+  image: string;
+  price: string;
+  onClick?: () => void;
+}
+
 export interface IMenuItemModifier {
   id: number;
   name: string;
