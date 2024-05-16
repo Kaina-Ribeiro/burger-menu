@@ -3,9 +3,11 @@ import Image from 'next/image';
 
 interface IMenuCard {
   isSelected: boolean;
+  image: string;
+  name: string;
 }
 
-export default function MenuCard({ isSelected }: IMenuCard) {
+export default function MenuCard({ isSelected, image, name }: IMenuCard) {
   return (
     <div
       className={classNames(
@@ -13,15 +15,18 @@ export default function MenuCard({ isSelected }: IMenuCard) {
         isSelected ? 'after:bg-primary' : '',
       )}
     >
-      <Image
-        className="rounded-full"
-        src="/images/menu/burguer.png"
-        width={74}
-        height={74}
-        alt=""
-      />
+      <div className="w-[74px] h-[74px] relative rounded-full overflow-hidden">
+        <Image
+          className="w-auto h-auto"
+          src={image}
+          alt={name}
+          fill
+          objectFit="cover"
+          objectPosition="center"
+        />
+      </div>
 
-      <p className="font-semibold text-base">Burgers</p>
+      <p className="font-semibold text-base">{name}</p>
     </div>
   );
 }
