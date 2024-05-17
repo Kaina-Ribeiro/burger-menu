@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function SearchBar() {
+export default function InputSearchBar() {
   return (
     <div className="flex items-center border rounded-md border-[#8A94A4] overflow-hidden bg-white w-full">
       <label htmlFor="search" className="py-[10px] px-[12px] bg-white">

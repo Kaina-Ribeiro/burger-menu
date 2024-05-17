@@ -4,17 +4,15 @@ import Accordion from '../Accordion';
 import MenuCard from './MenuCard';
 import MenuItem from './MenuItem';
 import { IRestaurantMenu, IMenuSection } from '@/types/menu';
-import { IAppInfo } from '@/types/app-info';
 import { useState } from 'react';
-import Modal from '../Modal';
-import MenuOrderItem from './MenuOrderItem';
+import { useAppSelector } from '@/lib/hooks';
 
 interface MenuPanelProps {
   menu: IRestaurantMenu;
-  appInfo: IAppInfo;
 }
 
-export default function MenuPanel({ menu, appInfo }: MenuPanelProps) {
+export default function MenuPanel({ menu }: MenuPanelProps) {
+  const appInfo = useAppSelector((state) => state.app.info);
   const [selectedSection, setSelectedSection] = useState<IMenuSection>(
     menu.sections?.[0],
   );
@@ -51,11 +49,12 @@ export default function MenuPanel({ menu, appInfo }: MenuPanelProps) {
                 key={item.id}
                 name={item.name}
                 description={item.description ?? ''}
-                price={item.price.toLocaleString(appInfo.locale, {
-                  currency: appInfo.ccy,
+                price={item.price.toLocaleString(appInfo?.locale, {
+                  currency: appInfo?.ccy,
                   minimumFractionDigits: 2,
                   style: 'currency',
                 })}
+                modifiers={item?.modifiers}
                 image={item?.images?.[0].image}
                 onClick={openModal}
               />
