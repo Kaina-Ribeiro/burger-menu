@@ -13,6 +13,7 @@ export default function MenuItem({
 }: IMenuItemProps) {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => setIsOpen((i) => !i);
+
   return (
     <>
       <div
@@ -22,7 +23,7 @@ export default function MenuItem({
         <div className="flex w-full gap-4 items-center justify-between">
           <div className="flex flex-col gap-1 overflow-hidden">
             <p className="font-medium text-base text-black-100">{name}</p>
-            <span className="font-light text-base text-gray-200 truncate text-ellipsis">
+            <span className="font-light text-base text-gray-200 md:truncate max-w-sm text-ellipsis">
               {description}
             </span>
             <span className="font-medium text-base text-gray-200">{price}</span>

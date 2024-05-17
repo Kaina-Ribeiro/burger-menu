@@ -5,6 +5,7 @@ import './globals.scss';
 import Banner from '@/components/Banner';
 import StoreProvider from './StoreProvider';
 import getAppInfo from '@/serverActions/getAppInfo';
+import FooterMobile from '@/components/Footer/FooterMobile';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -42,9 +43,14 @@ export default async function RootLayout({
     <StoreProvider appInfo={app}>
       <html lang="pt-BR">
         <body className={inter.className}>
-          <Header />
-          <Banner />
-          <div className="p-4 bg-body">{children}</div>
+          <div className="relative">
+            <div className="h-screen w-full">
+              <Header />
+              <Banner bannerImage={app.webSettings.bannerImage} />
+              <div className="bg-white md:bg-body">{children}</div>
+            </div>
+            <FooterMobile />
+          </div>
         </body>
       </html>
     </StoreProvider>

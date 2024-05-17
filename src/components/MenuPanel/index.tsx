@@ -17,14 +17,10 @@ export default function MenuPanel({ menu }: MenuPanelProps) {
     menu.sections?.[0],
   );
 
-  const openModal = () => {
-    return '';
-  };
-
   return (
-    <div className="flex flex-col bg-white max-w-xl w-full gap-14 shadow-md py-5">
+    <div className="flex flex-col md:max-w-xl w-full bg-white gap-14 md:shadow-md md:py-5">
       <div className="px-4">
-        <div className="flex gap-3">
+        <div className="flex items-center justify-center md:justify-start gap-3">
           {menu.sections.map((section) => (
             <div
               className="cursor-pointer"
@@ -56,7 +52,6 @@ export default function MenuPanel({ menu }: MenuPanelProps) {
                 })}
                 modifiers={item?.modifiers}
                 image={item?.images?.[0].image}
-                onClick={openModal}
               />
             ))}
           </div>
