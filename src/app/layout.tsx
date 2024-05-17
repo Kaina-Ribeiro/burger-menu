@@ -1,7 +1,7 @@
 import Header from '@/components/Header';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
+import './globals.scss';
 import Banner from '@/components/Banner';
 import StoreProvider from './StoreProvider';
 import getAppInfo from '@/serverActions/getAppInfo';
@@ -35,8 +35,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  preloadAppInfo();
+  const app = await getAppInfo();
+
   return (
-    <StoreProvider>
+    <StoreProvider appInfo={app}>
       <html lang="pt-BR">
         <body className={inter.className}>
           <Header />

@@ -9,6 +9,7 @@ export default function MenuItem({
   description,
   price,
   image,
+  modifiers,
 }: IMenuItemProps) {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => setIsOpen((i) => !i);
@@ -38,6 +39,7 @@ export default function MenuItem({
           description={description}
           price={price}
           image={image}
+          modifiers={modifiers}
         />
       </Modal>
     </>

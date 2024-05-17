@@ -12,8 +12,9 @@ const config: Config = {
         primary: { DEFAULT: '#4F372F', dark: '#36231C' },
         container: '#F8F9FA',
         body: '#EEEEEE',
-        'gray-100': '#5F5F5F',
+        'gray-100': '#DADADA',
         'gray-200': '#464646',
+        'gray-300': '#5F5F5F',
         'black-100': '#121212',
       },
       screens: {
@@ -32,6 +33,7 @@ const config: Config = {
       fontSize: {
         base: ['16px', '18.75px'],
         '2xl': ['24px', '28.13px'],
+        lg: ['18px', '21.09px'],
       },
       boxShadow: {
         sm: '0px 2px 2px 0px #0000001F',
@@ -39,6 +41,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 };
 export default config;
