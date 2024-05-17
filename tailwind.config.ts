@@ -10,15 +10,12 @@ const config: Config = {
     extend: {
       colors: {
         primary: { DEFAULT: '#4F372F', dark: '#36231C' },
-        container: '#F8F9FA',
         body: '#EEEEEE',
+        'gray-50': '#F8F9FA',
         'gray-100': '#DADADA',
         'gray-200': '#464646',
         'gray-300': '#5F5F5F',
         'black-100': '#121212',
-      },
-      screens: {
-        desktop: '1024px',
       },
       height: {
         '83': '1337px',

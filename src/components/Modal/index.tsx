@@ -18,8 +18,8 @@ export default function Modal({ isOpen, onClose, children }: IModalProps) {
   return (
     <>
       {isOpen && (
-        <div className="fixed inset-0 bg-[#000000A6] flex justify-center items-center">
-          <div className="flex relative w-[480px] h-[720px] rounded-lg bg-white">
+        <div className="fixed inset-0 bg-[#000000A6] flex justify-center items-center z-20">
+          <div className="flex relative sm:w-[480px] sm:h-[720px] w-full h-full rounded-lg md:bg-white bg-gray-50">
             <button
               className="absolute top-5 right-4 shadow-sm p-2 rounded-full bg-white"
               onClick={onClose}
@@ -31,7 +31,9 @@ export default function Modal({ isOpen, onClose, children }: IModalProps) {
                 alt="arrow"
               />
             </button>
-            <div className="overflow-y-scroll scrollbar-none">{children}</div>
+            <div className="flex-1 overflow-y-scroll scrollbar-none">
+              {children}
+            </div>
 
             <FooterModal />
           </div>

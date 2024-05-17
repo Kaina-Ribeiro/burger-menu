@@ -1,6 +1,7 @@
 'use client';
 import { useAppSelector, useAppDispatch } from '@/lib/hooks';
 import { sumQtd, subQtd } from '@/lib/features/cart/cartSlice';
+import Image from 'next/image';
 
 interface CartItemProps {
   id: number;
@@ -29,7 +30,7 @@ export default function CartItem({
   };
 
   return (
-    <div className="p-4 leading-5">
+    <div className="p-4 leading-5 bg-white">
       <div className="font-semibold flex justify-between">
         <p>{name}</p>
         <span>
@@ -48,16 +49,18 @@ export default function CartItem({
       <div className="flex items-center gap-2 mt-2">
         <button
           onClick={sub}
-          className="w-[20px] h-[20px] bg-primary-dark text-white flex items-center justify-center rounded-full"
+          className="bg-primary w-5 h-5 px-1 py-[8.5px] rounded-full"
         >
-          -
+          <div className="w-[12px] h-[3px] bg-white" />
         </button>
-        {quantity}
-        <button
-          onClick={sum}
-          className="w-[20px] h-[20px] bg-primary-dark text-white flex items-center justify-center rounded-full"
-        >
-          +
+        <span className="font-bold text-black-100">{quantity}</span>
+        <button onClick={sum} className="bg-primary w-5 h-5 p-1 rounded-full">
+          <Image
+            src="/images/icons/plus-icon.svg"
+            alt="plus-icon"
+            width={12}
+            height={12}
+          />
         </button>
       </div>
     </div>

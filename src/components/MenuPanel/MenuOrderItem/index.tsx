@@ -1,5 +1,3 @@
-'use client';
-
 import { IMenuItemProps } from '@/types/menu';
 import Image from 'next/image';
 import { useAppSelector } from '@/lib/hooks';
@@ -16,7 +14,14 @@ export default function MenuOrderItem({
   return (
     <div className="flex-1 flex flex-col pb-[122px]">
       {image && (
-        <Image src={image} width={503} height={320} alt={name} priority />
+        <Image
+          style={{ objectFit: 'cover', width: '100%' }}
+          src={image}
+          width={503}
+          height={320}
+          alt={name}
+          priority
+        />
       )}
 
       <div className="flex flex-col gap-2 p-4">
