@@ -10,6 +10,7 @@ interface IModalProps {
   children: any;
   modalFooter?: ReactNode;
   boxShadow?: boolean;
+  fullHeight?: boolean;
 }
 
 export default function Modal({
@@ -18,6 +19,7 @@ export default function Modal({
   children,
   modalFooter,
   boxShadow,
+  fullHeight = true,
 }: IModalProps) {
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
@@ -26,8 +28,13 @@ export default function Modal({
   return (
     <>
       {isOpen && (
-        <div className="fixed inset-0 bg-[#000000A6] flex justify-center items-center z-20">
-          <div className="flex relative sm:w-[480px] sm:h-[720px] w-full h-full rounded-lg md:bg-white bg-gray-50">
+        <div className="fixed inset-0 bg-[#000000A6] flex justify-center sm:items-center items-end z-20">
+          <div
+            className={classNames(
+              'flex relative sm:w-[480px] sm:h-[720px] w-full rounded-lg md:bg-white ',
+              fullHeight ? 'h-full bg-gray-50' : 'h-fit bg-white',
+            )}
+          >
             <button
               className={classNames(
                 'absolute top-5 right-4 p-2 rounded-full bg-white',

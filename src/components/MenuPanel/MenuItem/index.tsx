@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import FooterOrderItem from '@/components/Footer/FooterOrderItem';
 import { useAppSelector } from '@/lib/hooks';
 import { priceInternalization } from '@/utils/priceInternalization';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 export default function MenuItem({
   id,
@@ -22,6 +23,8 @@ export default function MenuItem({
   const openModal = () => setIsOpen((i) => !i);
   const [amount, setAmount] = useState(0);
   const items = useAppSelector((state) => state.cart.items);
+  const isMobile = useMediaQuery('(max-width: 640px)');
+  const useAlternativeStyle = !!(isMobile && modifiers && modifiers.length > 0);
 
   useEffect(() => {
     const qtds = items
@@ -65,8 +68,14 @@ export default function MenuItem({
       <Modal
         isOpen={isOpen}
         onClose={openModal}
-        modalFooter={<FooterOrderItem onClose={openModal} />}
-        boxShadow
+        modalFooter={
+          <FooterOrderItem
+            alternativeBackground={useAlternativeStyle}
+            onClose={openModal}
+          />
+        }
+        boxShadow={useAlternativeStyle}
+        fullHeight={useAlternativeStyle}
       >
         <MenuOrderItem
           id={id}
@@ -75,6 +84,7 @@ export default function MenuItem({
           price={price}
           image={image}
           modifiers={modifiers}
+          useAlternativeStyle={!useAlternativeStyle}
         />
       </Modal>
     </>
