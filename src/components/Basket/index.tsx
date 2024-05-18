@@ -16,7 +16,7 @@ export default function Basket() {
         minimumFractionDigits: 2,
       });
   };
-  console.log(items);
+
   return (
     <div className="flex-1 md:max-w-80 md:min-w-[215px] w-full md:h-fit md:shadow-md">
       <div className="w-full text-center md:text-left md:py-[22px] py-[23px] px-6 md:bg-gray-50 bg-white border-b border-solid border-gray-100">
@@ -48,7 +48,7 @@ export default function Basket() {
               <div className="flex justify-between items-center text-base w-full p-4 ">
                 <p className="font-normal">Sub total</p>
                 <span className="font-medium">
-                  {totalSum(...items?.map((i) => i.price * i.quantity))}
+                  {totalSum(...items?.map((i) => i.price))}
                 </span>
               </div>
               <div className="px-4">

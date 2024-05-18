@@ -6,7 +6,15 @@ import { classNames } from '@/utils/classNames';
 import Image from 'next/image';
 import { useCallback } from 'react';
 
-export default function FooterOrderItem({ onClose }: { onClose: () => void }) {
+interface IFooterOrderItemProps {
+  onClose: () => void;
+  alternativeBackground?: boolean;
+}
+
+export default function FooterOrderItem({
+  onClose,
+  alternativeBackground,
+}: IFooterOrderItemProps) {
   const appInfo = useAppSelector((state) => state.app.info);
   const dispatch = useAppDispatch();
   const item = useAppSelector((state) => state.menu.item);
@@ -59,8 +67,13 @@ export default function FooterOrderItem({ onClose }: { onClose: () => void }) {
     onClose();
   };
   return (
-    <footer className="absolute bottom-0 w-full h-[122px] md:backdrop-blur-md md:bg-white/30 bg-white z-10 px-6 pb-6 pt-2">
-      <div className="flex flex-col gap-[10px] items-center justify-center">
+    <footer
+      className={classNames(
+        'absolute bottom-0 w-full h-[122px] md:backdrop-blur-md md:bg-white/30 z-10 px-6 pb-6 pt-2',
+        alternativeBackground ? 'bg-white' : 'bg-gray-50r',
+      )}
+    >
+      <div className="flex flex-col w-full gap-[10px] items-center justify-center">
         <div className="flex gap-4">
           <button
             className={classNames(

@@ -7,6 +7,11 @@ import { IMenuItemProps } from '@/types/menu';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import MenuOrderItemModifier from './MenuOrderItemModifier';
+import { classNames } from '@/utils/classNames';
+
+interface IMenuOrderItemProps extends IMenuItemProps {
+  useAlternativeStyle?: boolean;
+}
 
 export default function MenuOrderItem({
   id,
@@ -15,7 +20,8 @@ export default function MenuOrderItem({
   image,
   modifiers,
   price,
-}: IMenuItemProps) {
+  useAlternativeStyle = false,
+}: IMenuOrderItemProps) {
   const dispatch = useAppDispatch();
   const [cartModifiers, setCartModifiers] = useState<ICartItemModifier[]>([]);
 
@@ -39,7 +45,12 @@ export default function MenuOrderItem({
 
   return (
     <>
-      <div className="flex-1 flex flex-col pb-[122px]">
+      <div
+        className={classNames(
+          'flex-1 flex flex-col ',
+          useAlternativeStyle ? 'pb-[151px]' : 'pb-[122px]',
+        )}
+      >
         {image && (
           <Image
             style={{ objectFit: 'cover', width: '100%' }}
@@ -51,7 +62,12 @@ export default function MenuOrderItem({
           />
         )}
 
-        <div className="flex flex-col gap-2 p-4">
+        <div
+          className={classNames(
+            'flex flex-col gap-2',
+            useAlternativeStyle && !image ? 'p-6' : 'p-4',
+          )}
+        >
           <p className="font-bold text-2xl text-black-100">{name}</p>
           <span className="font-normal text-base text-gray-200">
             {description}
