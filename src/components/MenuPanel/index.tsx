@@ -1,18 +1,16 @@
 'use client';
 
+import { IMenuSection, IRestaurantMenu } from '@/types/menu';
+import { useState } from 'react';
 import Accordion from '../Accordion';
 import MenuCard from './MenuCard';
 import MenuItem from './MenuItem';
-import { IRestaurantMenu, IMenuSection } from '@/types/menu';
-import { useState } from 'react';
-import { useAppSelector } from '@/lib/hooks';
 
 interface MenuPanelProps {
   menu: IRestaurantMenu;
 }
 
 export default function MenuPanel({ menu }: MenuPanelProps) {
-  const appInfo = useAppSelector((state) => state.app.info);
   const [selectedSection, setSelectedSection] = useState<IMenuSection>(
     menu.sections?.[0],
   );
@@ -43,13 +41,10 @@ export default function MenuPanel({ menu }: MenuPanelProps) {
             {selectedSection.items.map((item) => (
               <MenuItem
                 key={item.id}
+                id={item.id}
                 name={item.name}
                 description={item.description ?? ''}
-                price={item.price.toLocaleString(appInfo?.locale, {
-                  currency: appInfo?.ccy,
-                  minimumFractionDigits: 2,
-                  style: 'currency',
-                })}
+                price={item.price}
                 modifiers={item?.modifiers}
                 image={item?.images?.[0].image}
               />

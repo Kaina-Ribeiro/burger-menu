@@ -14,9 +14,9 @@ export interface IMenuItem {
 }
 
 export interface IMenuItemProps
-  extends Pick<IMenuItem, 'name' | 'description' | 'modifiers'> {
+  extends Pick<IMenuItem, 'name' | 'description' | 'modifiers' | 'id'> {
   image: string;
-  price: string;
+  price: number;
   onClick?: () => void;
 }
 

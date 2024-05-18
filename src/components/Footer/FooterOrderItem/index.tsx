@@ -1,15 +1,86 @@
+'use client';
+import { addToCart } from '@/lib/features/cart/cartSlice';
+import { subItemQtd, sumItemQtd } from '@/lib/features/menu/menuSlice';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { classNames } from '@/utils/classNames';
 import Image from 'next/image';
+import { useCallback } from 'react';
 
-export default function FooterOrderItem() {
+export default function FooterOrderItem({ onClose }: { onClose: () => void }) {
+  const appInfo = useAppSelector((state) => state.app.info);
+  const dispatch = useAppDispatch();
+  const item = useAppSelector((state) => state.menu.item);
+
+  const isValid = useCallback(() => {
+    return !item?.modifiers
+      .map((m) => m.items.length >= m.minChoices)
+      .filter((r) => r === false).length;
+  }, [item]);
+
+  const price = useCallback(() => {
+    const values: number[] = [0];
+
+    item?.modifiers.forEach((m) => {
+      m.items.forEach((i) => values.push(i.price));
+    });
+
+    values.push(item?.price ?? 0);
+
+    return values.reduce((a, b) => (a += b)) * (item?.quantity ?? 1);
+  }, [item]);
+
+  const sumQtd = () => {
+    dispatch(sumItemQtd());
+  };
+
+  const subQtd = () => {
+    dispatch(subItemQtd());
+  };
+
+  const submit = () => {
+    if (!item) return;
+
+    const modifiers: string[] = [];
+
+    item.modifiers.forEach((i) => {
+      i.items.forEach((i) => {
+        modifiers.push(i.name);
+      });
+    });
+
+    dispatch(
+      addToCart({
+        ...item,
+        price: price() / item.quantity,
+        modifiers,
+      }),
+    );
+
+    onClose();
+  };
   return (
     <footer className="absolute bottom-0 w-full h-[122px] md:backdrop-blur-md md:bg-white/30 bg-white z-10 px-6 pb-6 pt-2">
       <div className="flex flex-col gap-[10px] items-center justify-center">
         <div className="flex gap-4">
-          <button className="bg-gray-100 px-[7px] py-[14.5px] rounded-full">
-            <div className="w-[18px] h-[3px] bg-gray-400" />
+          <button
+            className={classNames(
+              'px-[7px] py-[14.5px] rounded-full',
+              item?.quantity === 1 ? 'bg-gray-100' : 'bg-primary',
+            )}
+            onClick={subQtd}
+          >
+            <div
+              className={`w-[18px] h-[3px] ${item?.quantity === 1 ? 'bg-primary' : 'bg-white'}`}
+            />
           </button>
-          <span className="text-black-100 font-semibold text-2xl">1</span>
-          <button className="bg-primary p-[7px] rounded-full">
+          <span className="text-black-100 font-semibold text-2xl">
+            {item?.quantity}
+          </span>
+          <button
+            className="bg-primary p-[7px] rounded-full"
+            onClick={sumQtd}
+            disabled={!isValid()}
+          >
             <Image
               src="/images/icons/plus-icon.svg"
               alt="plus-icon"
@@ -19,8 +90,17 @@ export default function FooterOrderItem() {
           </button>
         </div>
 
-        <button className="bg-primary max-w-[432px] w-full h-12 rounded-[40px] text-white font-medium text-lg">
-          Add to Order • 1
+        <button
+          className="bg-primary max-w-[432px] w-full h-12 rounded-[40px] text-white font-medium text-lg disabled:!bg-gray-100 disabled:text-gray-300 disabled:cursor-not-allowed transition-opacity"
+          onClick={submit}
+          disabled={!isValid()}
+        >
+          Add to Order •{' '}
+          {price().toLocaleString(appInfo?.locale, {
+            currency: appInfo?.ccy,
+            style: 'currency',
+            minimumFractionDigits: 2,
+          })}
         </button>
       </div>
     </footer>

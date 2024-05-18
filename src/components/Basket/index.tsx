@@ -16,12 +16,12 @@ export default function Basket() {
         minimumFractionDigits: 2,
       });
   };
-
+  console.log(items);
   return (
-    <div className="flex-1 md:max-w-80 w-full md:h-fit md:shadow-md">
+    <div className="flex-1 md:max-w-80 md:min-w-[215px] w-full md:h-fit md:shadow-md">
       <div className="w-full text-center md:text-left md:py-[22px] py-[23px] px-6 md:bg-gray-50 bg-white border-b border-solid border-gray-100">
         <h1 className="font-medium text-lg text-black-100 md:font-semibold md:text-2xl md:text-gray-400">
-          Carrinho
+          Basket
         </h1>
       </div>
 
@@ -36,7 +36,7 @@ export default function Basket() {
           {items.map((item) => (
             <CartItem
               key={item.id}
-              id={item.id}
+              id={Number(item.id)}
               name={item.name}
               price={item.price}
               quantity={item.quantity}

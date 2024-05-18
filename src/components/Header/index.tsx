@@ -11,11 +11,11 @@ const navigation = [
   },
   {
     name: 'Entrar',
-    path: '/',
+    path: '/entrar',
   },
   {
     name: 'Contato',
-    path: '/',
+    path: '/contato',
   },
 ];
 

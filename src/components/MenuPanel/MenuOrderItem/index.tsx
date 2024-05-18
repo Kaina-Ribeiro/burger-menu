@@ -1,70 +1,75 @@
+'use client';
+
+import { addCartItem } from '@/lib/features/menu/menuSlice';
+import { useAppDispatch } from '@/lib/hooks';
+import { ICartItemModifier } from '@/types/cart';
 import { IMenuItemProps } from '@/types/menu';
 import Image from 'next/image';
-import { useAppSelector } from '@/lib/hooks';
-import RadioInput from '../../RadioInput';
+import { useCallback, useEffect, useState } from 'react';
+import MenuOrderItemModifier from './MenuOrderItemModifier';
 
 export default function MenuOrderItem({
+  id,
   name,
   description,
   image,
   modifiers,
+  price,
 }: IMenuItemProps) {
-  const appInfo = useAppSelector((state) => state.app.info);
+  const dispatch = useAppDispatch();
+  const [cartModifiers, setCartModifiers] = useState<ICartItemModifier[]>([]);
+
+  const updateModifiers = useCallback((modifier: ICartItemModifier) => {
+    setCartModifiers((prev) => {
+      return [...prev.filter((i) => i.id !== modifier.id), modifier];
+    });
+  }, []);
+
+  useEffect(() => {
+    dispatch(
+      addCartItem({
+        id,
+        quantity: 1,
+        name,
+        price,
+        modifiers: cartModifiers,
+      }),
+    );
+  }, [cartModifiers, dispatch, id, name, price]);
 
   return (
-    <div className="flex-1 flex flex-col pb-[122px]">
-      {image && (
-        <Image
-          style={{ objectFit: 'cover', width: '100%' }}
-          src={image}
-          width={503}
-          height={320}
-          alt={name}
-          priority
-        />
-      )}
+    <>
+      <div className="flex-1 flex flex-col pb-[122px]">
+        {image && (
+          <Image
+            style={{ objectFit: 'cover', width: '100%' }}
+            src={image}
+            width={503}
+            height={320}
+            alt={name}
+            priority
+          />
+        )}
 
-      <div className="flex flex-col gap-2 p-4">
-        <p className="font-bold text-2xl text-black-100">{name}</p>
-        <span className="font-normal text-base text-gray-400">
-          {description}
-        </span>
-      </div>
-
-      {modifiers?.map((modifier) => (
-        <div key={modifier.id} className="">
-          <div className="leading-5 bg-black/5 p-4">
-            <p className="font-bold">{modifier.name}</p>
-            {modifier.minChoices && (
-              <>
-                Select {modifier.minChoices}{' '}
-                {modifier.minChoices > 1 ? 'options' : 'option'}
-              </>
-            )}
-          </div>
-
-          <div className="flex flex-col">
-            {modifier.items.map((item) => (
-              <div
-                key={item.id}
-                className="p-4 pr-8 leading-6 flex items-center justify-between"
-              >
-                <div>
-                  <p className="font-semibold">{item.name}</p>
-                  <span>
-                    {item.price.toLocaleString(appInfo?.locale, {
-                      currency: appInfo?.ccy,
-                      style: 'currency',
-                      minimumFractionDigits: 2,
-                    })}
-                  </span>
-                </div>
-                <RadioInput active={false} />
-              </div>
-            ))}
-          </div>
+        <div className="flex flex-col gap-2 p-4">
+          <p className="font-bold text-2xl text-black-100">{name}</p>
+          <span className="font-normal text-base text-gray-200">
+            {description}
+          </span>
         </div>
-      ))}
-    </div>
+
+        {modifiers?.map((modifier) => (
+          <MenuOrderItemModifier
+            key={modifier.id}
+            id={modifier.id}
+            name={modifier.name}
+            items={modifier.items}
+            minChoices={modifier.minChoices}
+            maxChoices={modifier.maxChoices}
+            updateModifier={updateModifiers}
+          />
+        ))}
+      </div>
+    </>
   );
 }

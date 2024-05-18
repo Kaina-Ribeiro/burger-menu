@@ -2,6 +2,7 @@
 import { useAppSelector, useAppDispatch } from '@/lib/hooks';
 import { sumQtd, subQtd } from '@/lib/features/cart/cartSlice';
 import Image from 'next/image';
+import { priceInternalization } from '@/utils/priceInternalization';
 
 interface CartItemProps {
   id: number;
@@ -22,30 +23,29 @@ export default function CartItem({
   const appInfo = useAppSelector((state) => state.app.info);
 
   const sum = () => {
-    dispatch(sumQtd(id));
+    dispatch(sumQtd(id.toString()));
   };
 
   const sub = () => {
-    dispatch(subQtd(id));
+    dispatch(subQtd(id.toString()));
   };
 
   return (
     <div className="p-4 leading-5 bg-white">
-      <div className="font-semibold flex justify-between">
+      <div className="flex justify-between text-black-100">
         <p>{name}</p>
-        <span>
-          {price.toLocaleString(appInfo?.locale, {
-            currency: appInfo?.ccy,
-            style: 'currency',
-            minimumFractionDigits: 2,
-          })}
+        <span className="font-medium">
+          {priceInternalization({ price, appInfo })}
         </span>
       </div>
+
       {modifiers?.map((modifier, i) => (
-        <span className="block" key={i}>
-          {modifier}
+        <span className="font-normal text-base text-gray-300" key={i}>
+          {modifier}{' '}
+          {`(+${priceInternalization({ price: quantity * price, appInfo })})`}
         </span>
       ))}
+
       <div className="flex items-center gap-2 mt-2">
         <button
           onClick={sub}

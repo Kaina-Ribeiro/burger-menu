@@ -1,53 +1,31 @@
+import { ICartItem } from '@/types/cart';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface ICartItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  modifiers?: string[];
-}
+type CartItem = Omit<ICartItem, 'modifiers'> & {
+  modifiers: string[];
+};
 
 const initialState: {
-  items: ICartItem[];
+  items: CartItem[];
 } = {
-  items: [
-    {
-      id: 1,
-      name: 'test',
-      price: 25,
-      quantity: 1,
-      modifiers: ['Smash', 'test'],
-    },
-    {
-      id: 2,
-      name: 'test',
-      price: 10,
-      quantity: 1,
-      modifiers: ['Smash', 'test'],
-    },
-    {
-      id: 3,
-      name: 'test',
-      price: 67,
-      quantity: 1,
-      modifiers: ['Smash', 'test'],
-    },
-  ],
+  items: [],
 };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart(state, action: PayloadAction<ICartItem>) {
-      state.items.push(action.payload);
+    addToCart(state, action: PayloadAction<CartItem>) {
+      state.items.push({
+        ...action.payload,
+        id: `${action.payload.id}.${(+action.payload.id * Math.random()).toString().split('.')[0]}`,
+      });
     },
-    sumQtd(state, action: PayloadAction<number>) {
+    sumQtd(state, action: PayloadAction<string>) {
       const index = state.items.findIndex((item) => item.id === action.payload);
       state.items[index].quantity++;
     },
-    subQtd(state, action: PayloadAction<number>) {
+    subQtd(state, action: PayloadAction<string>) {
       const index = state.items.findIndex((item) => item.id === action.payload);
       const item = state.items[index];
 
