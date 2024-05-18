@@ -28,7 +28,10 @@ export default function Modal({
   return (
     <>
       {isOpen && (
-        <div className="fixed inset-0 bg-[#000000A6] flex justify-center sm:items-center items-end z-20">
+        <div
+          data-testid="modal"
+          className="fixed inset-0 bg-[#000000A6] flex justify-center items-center z-20"
+        >
           <div
             className={classNames(
               'flex relative sm:w-[480px] sm:h-[720px] w-full rounded-lg md:bg-white ',
@@ -41,6 +44,7 @@ export default function Modal({
                 boxShadow ? 'shadow-sm' : '',
               )}
               onClick={onClose}
+              data-testid="modal-close-button"
             >
               <Image
                 src="/images/icons/chevron.svg"

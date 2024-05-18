@@ -76,6 +76,7 @@ export default function FooterOrderItem({
       <div className="flex flex-col w-full gap-[10px] items-center justify-center">
         <div className="flex gap-4">
           <button
+            data-testid="sub-button"
             className={classNames(
               'px-[7px] py-[14.5px] rounded-full',
               item?.quantity === 1 ? 'bg-gray-100' : 'bg-primary',
@@ -86,10 +87,14 @@ export default function FooterOrderItem({
               className={`w-[18px] h-[3px] ${item?.quantity === 1 ? 'bg-primary' : 'bg-white'}`}
             />
           </button>
-          <span className="text-black-100 font-semibold text-2xl">
+          <span
+            data-testid="item-quantity"
+            className="text-black-100 font-semibold text-2xl"
+          >
             {item?.quantity}
           </span>
           <button
+            data-testid="sum-button"
             className="bg-primary p-[7px] rounded-full"
             onClick={sumQtd}
             disabled={!isValid()}
@@ -104,16 +109,19 @@ export default function FooterOrderItem({
         </div>
 
         <button
+          data-testid="add-to-cart-button"
           className="bg-primary max-w-[432px] w-full h-12 rounded-[40px] text-white font-medium text-lg disabled:!bg-gray-100 disabled:text-gray-300 disabled:cursor-not-allowed transition-opacity"
           onClick={submit}
           disabled={!isValid()}
         >
-          Add to Order •{' '}
-          {price().toLocaleString(appInfo?.locale, {
-            currency: appInfo?.ccy,
-            style: 'currency',
-            minimumFractionDigits: 2,
-          })}
+          <span data-testid="footer-order-price">
+            Add to Order •{' '}
+            {price().toLocaleString(appInfo?.locale, {
+              currency: appInfo?.ccy,
+              style: 'currency',
+              minimumFractionDigits: 2,
+            })}
+          </span>
         </button>
       </div>
     </footer>

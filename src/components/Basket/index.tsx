@@ -32,7 +32,7 @@ export default function Basket() {
           </span>
         </div>
       )) || (
-        <>
+        <div>
           {items.map((item) => (
             <CartItem
               key={item.id}
@@ -56,13 +56,13 @@ export default function Basket() {
               </div>
               <div className="flex md:gap-8 justify-between items-center text-2xl w-full p-4">
                 <p className="font-light">Total:</p>
-                <span className="font-bold">
+                <span className="font-bold" data-testid="cart-total-price">
                   {totalSum(...items?.map((i) => i.price * i.quantity))}
                 </span>
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

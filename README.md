@@ -17,6 +17,7 @@ The following tools were used in the construction of the project:
 - [ESLint][eslint]
 - [Prettier][prettier]
 - [Critters][critters]
+- [Playwright][playwright]
 
 ### Prerequisites
 
@@ -53,3 +54,4 @@ Made by Gabriel Ribeiro 👋🏽
 [vercel]: https://vercel.com/
 [vscode]: https://code.visualstudio.com/
 [git]: https://git-scm.com/
+[playwright]: https://playwright.dev/docs/intro
