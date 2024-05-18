@@ -10,6 +10,10 @@ import { useAppSelector } from '@/lib/hooks';
 import { priceInternalization } from '@/utils/priceInternalization';
 import useMediaQuery from '@/hooks/useMediaQuery';
 
+function getTestId(str: string) {
+  return str.toLowerCase().split(' ').join('-');
+}
+
 export default function MenuItem({
   id,
   name,
@@ -39,6 +43,7 @@ export default function MenuItem({
   return (
     <>
       <div
+        data-testid={`${getTestId(name)}-item`}
         className="flex w-full hover:bg-black/5 p-4 transition-colors cursor-pointer"
         onClick={openModal}
       >
@@ -47,7 +52,12 @@ export default function MenuItem({
             <div className="font-medium text-base text-black-100 flex items-center gap-2">
               {amount > 0 && (
                 <div className="bg-primary text-white w-[18px] h-[18px] inline rounded-md text-center">
-                  <span className="font-medium text-sm">{amount}</span>
+                  <span
+                    data-testid={`${getTestId(name)}-item-amount`}
+                    className="font-medium text-sm"
+                  >
+                    {amount}
+                  </span>
                 </div>
               )}{' '}
               <span>{name}</span>
@@ -55,7 +65,10 @@ export default function MenuItem({
             <span className="font-light text-base text-gray-200 md:truncate max-w-sm text-ellipsis line-clamp-2 md:line-clamp-none">
               {description}
             </span>
-            <span className="font-medium text-base text-gray-200">
+            <span
+              data-testid={`${getTestId(name)}-item-price`}
+              className="font-medium text-base text-gray-200"
+            >
               {priceInternalization({ price, appInfo })}
             </span>
           </div>

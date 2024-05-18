@@ -25,6 +25,7 @@ export default function MenuCard({ isSelected, image, name }: IMenuCard) {
       )}
     >
       <div
+        data-testid={`${name.toLowerCase()}-tab-selector`}
         className={classNames(
           'flex items-center justify-center h-[82px] w-[82px] rounded-[50px] p-[2px] border-2 border-solid  transition-all duration-200',
           isSelected ? 'border-primary' : 'border-transparent',

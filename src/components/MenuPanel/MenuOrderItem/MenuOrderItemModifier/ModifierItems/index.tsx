@@ -6,6 +6,10 @@ import { ICartItemModifierItem } from '@/types/cart';
 import { IMenuItemModifierItem } from '@/types/menu';
 import { priceInternalization } from '@/utils/priceInternalization';
 
+function getTestId(str: string) {
+  return str.toLowerCase().split(' ').join('-');
+}
+
 export default function ModifierItems({
   items,
   toggleItem,
@@ -31,7 +35,10 @@ export default function ModifierItems({
                 {priceInternalization({ price: item.price, appInfo })}
               </span>
             </div>
-            <div onClick={() => toggleItem(item.id)}>
+            <div
+              data-testid={`${getTestId(item.name)}-radio`}
+              onClick={() => toggleItem(item.id)}
+            >
               <RadioInput
                 active={!!modifierItems.find((i) => i.id === item.id)}
               />
