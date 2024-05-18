@@ -1,13 +1,16 @@
 import Header from '@/components/Header';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 import './globals.scss';
 import Banner from '@/components/Banner';
 import StoreProvider from './StoreProvider';
 import getAppInfo from '@/serverActions/getAppInfo';
 import FooterMobile from '@/components/Footer/FooterMobile';
 
-const inter = Inter({ subsets: ['latin'] });
+const roboto = Roboto({
+  weight: ['300', '400', '500', '700'],
+  subsets: ['latin'],
+});
 
 function preloadAppInfo() {
   void getAppInfo();
@@ -42,7 +45,7 @@ export default async function RootLayout({
   return (
     <StoreProvider appInfo={app}>
       <html lang="pt-BR">
-        <body className={inter.className}>
+        <body className={roboto.className}>
           <div className="relative">
             <div className="h-screen w-full">
               <Header />

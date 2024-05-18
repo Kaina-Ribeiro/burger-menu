@@ -26,7 +26,7 @@ export default function MenuOrderItem({
 
       <div className="flex flex-col gap-2 p-4">
         <p className="font-bold text-2xl text-black-100">{name}</p>
-        <span className="font-normal text-base text-gray-200">
+        <span className="font-normal text-base text-gray-400">
           {description}
         </span>
       </div>

@@ -1,16 +1,24 @@
 'use client';
 
+import { classNames } from '@/utils/classNames';
 import Image from 'next/image';
-import FooterModal from '../Footer/FooterModal';
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 interface IModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: any;
+  modalFooter?: ReactNode;
+  boxShadow?: boolean;
 }
 
-export default function Modal({ isOpen, onClose, children }: IModalProps) {
+export default function Modal({
+  isOpen,
+  onClose,
+  children,
+  modalFooter,
+  boxShadow,
+}: IModalProps) {
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
   }, [isOpen]);
@@ -21,7 +29,10 @@ export default function Modal({ isOpen, onClose, children }: IModalProps) {
         <div className="fixed inset-0 bg-[#000000A6] flex justify-center items-center z-20">
           <div className="flex relative sm:w-[480px] sm:h-[720px] w-full h-full rounded-lg md:bg-white bg-gray-50">
             <button
-              className="absolute top-5 right-4 shadow-sm p-2 rounded-full bg-white"
+              className={classNames(
+                'absolute top-5 right-4 p-2 rounded-full bg-white',
+                boxShadow ? 'shadow-sm' : '',
+              )}
               onClick={onClose}
             >
               <Image
@@ -34,8 +45,7 @@ export default function Modal({ isOpen, onClose, children }: IModalProps) {
             <div className="flex-1 overflow-y-scroll scrollbar-none">
               {children}
             </div>
-
-            <FooterModal />
+            {modalFooter}
           </div>
         </div>
       )}

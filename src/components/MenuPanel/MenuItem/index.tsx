@@ -3,6 +3,7 @@ import { IMenuItemProps } from '@/types/menu';
 import Image from 'next/image';
 import MenuOrderItem from '../MenuOrderItem';
 import { useState } from 'react';
+import FooterOrderItem from '@/components/Footer/FooterOrderItem';
 
 export default function MenuItem({
   name,
@@ -23,7 +24,7 @@ export default function MenuItem({
         <div className="flex w-full gap-4 items-center justify-between">
           <div className="flex flex-col gap-1 overflow-hidden">
             <p className="font-medium text-base text-black-100">{name}</p>
-            <span className="font-light text-base text-gray-200 md:truncate max-w-sm text-ellipsis">
+            <span className="font-light text-base text-gray-200 md:truncate max-w-sm text-ellipsis line-clamp-2 md:line-clamp-none">
               {description}
             </span>
             <span className="font-medium text-base text-gray-200">{price}</span>
@@ -34,7 +35,12 @@ export default function MenuItem({
         </div>
       </div>
 
-      <Modal isOpen={isOpen} onClose={openModal}>
+      <Modal
+        isOpen={isOpen}
+        onClose={openModal}
+        modalFooter={<FooterOrderItem />}
+        boxShadow
+      >
         <MenuOrderItem
           name={name}
           description={description}

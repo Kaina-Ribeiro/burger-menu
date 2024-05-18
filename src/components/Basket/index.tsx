@@ -20,14 +20,14 @@ export default function Basket() {
   return (
     <div className="flex-1 md:max-w-80 w-full md:h-fit md:shadow-md">
       <div className="w-full text-center md:text-left md:py-[22px] py-[23px] px-6 md:bg-gray-50 bg-white border-b border-solid border-gray-100">
-        <h1 className="font-medium text-lg text-black-100 md:font-semibold md:text-2xl md:text-gray-200">
+        <h1 className="font-medium text-lg text-black-100 md:font-semibold md:text-2xl md:text-gray-400">
           Carrinho
         </h1>
       </div>
 
       {(!items.length && (
         <div className="p-6 bg-white">
-          <span className="font-normal text-gray-200">
+          <span className="font-normal text-gray-400">
             Seu carrinho está vazio
           </span>
         </div>
@@ -54,7 +54,7 @@ export default function Basket() {
               <div className="px-4">
                 <Row />
               </div>
-              <div className="flex justify-between items-center text-2xl w-full p-4">
+              <div className="flex md:gap-8 justify-between items-center text-2xl w-full p-4">
                 <p className="font-light">Total:</p>
                 <span className="font-bold">
                   {totalSum(...items?.map((i) => i.price * i.quantity))}

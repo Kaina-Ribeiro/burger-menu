@@ -16,13 +16,13 @@ export default function HeaderDesktop({
         return (
           <Link
             className={classNames(
-              'relative w-[232px] h-full flex items-center text-white justify-center after:absolute after:block after:w-full after:h-[5px] after:bottom-0 after:transition-colors after:duration-200',
+              'relative w-[232px] h-full flex items-center text-white justify-center after:absolute after:block after:w-full after:h-[5px] after:bottom-0 after:transition-colors after:duration-200 hover:opacity-80',
               pathName === item.path ? `after:bg-white` : '',
             )}
             key={item.path}
             href={item.path}
           >
-            {item.name}
+            <span className="font-normal text-xl">{item.name}</span>
           </Link>
         );
       })}
