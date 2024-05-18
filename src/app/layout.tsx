@@ -47,11 +47,18 @@ export default async function RootLayout({
       <html lang="pt-BR">
         <body className={roboto.className}>
           <div className="relative">
-            <div className="h-screen w-full">
+            <div className="min-h-screen w-full">
               <Header />
               <Banner bannerImage={app.webSettings.bannerImage} />
               <div className="bg-white md:bg-body">{children}</div>
             </div>
+            <footer className="w-full h-[147px] bg-gray-50 z-10 md:hidden">
+              <div className="flex flex-col h-[67px] border-y border-solid border-body items-center justify-center p-6">
+                <button className="bg-white max-w-[345px] w-full h-[19px] rounded-[8px] text-primary underline font-bold text-base">
+                  View Allergy information
+                </button>
+              </div>
+            </footer>
             <FooterMobile />
           </div>
         </body>

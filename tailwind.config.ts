@@ -29,6 +29,7 @@ const config: Config = {
         xl: '600px',
       },
       fontSize: {
+        sm: ['14px', '16.41px'],
         base: ['16px', '18.75px'],
         xl: ['20px', '23.44px'],
         '2xl': ['24px', '28.13px'],

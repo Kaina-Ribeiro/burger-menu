@@ -1,12 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import cartSlice from './features/cart/cartSlice';
 import appSlice from './features/app/appSlice';
+import menuSlice from './features/menu/menuSlice';
 
 export function makeStore() {
   return configureStore({
     reducer: combineReducers({
       app: appSlice,
       cart: cartSlice,
+      menu: menuSlice,
     }),
   });
 }
