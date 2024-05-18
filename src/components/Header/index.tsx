@@ -11,11 +11,11 @@ const navigation = [
   },
   {
     name: 'Entrar',
-    path: '/login',
+    path: '/',
   },
   {
     name: 'Contato',
-    path: '/contact',
+    path: '/',
   },
 ];
 
@@ -24,7 +24,7 @@ export default function Header() {
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
-    <header className="bg-primary px-4 flex justify-center">
+    <header className="bg-primary px-4 flex justify-center shadow-lg">
       {isMobile ? (
         <HeaderMobile navigation={navigation} pathName={pathName} />
       ) : (

@@ -12,9 +12,9 @@ export default async function Menu() {
   const menu = await getMenuInfo();
 
   return (
-    <section id="menu" className="flex justify-center items-center">
+    <section id="menu" className="flex justify-center items-center md:px-4">
       <div className="flex flex-col items-center justify-center md:gap-[6px] md:max-w-screen-lg w-full">
-        <div className="w-full p-4">
+        <div className="w-full py-4 px-4 md:px-0">
           <InputSearchBar />
         </div>
         <div className="flex justify-center w-full md:h-83 md:bg-gray-50">

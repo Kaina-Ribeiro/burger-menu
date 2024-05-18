@@ -1,10 +1,13 @@
 'use client';
 import Basket from '@/components/Basket';
 import Modal from '@/components/Modal';
+import useMediaQuery from '@/hooks/useMediaQuery';
 import { useState } from 'react';
+import FooterBasketCheckout from '../FooterBasketCheckout';
 
 export default function FooterMobile() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const openModal = () => setIsOpen((i) => !i);
 
   return (
@@ -17,12 +20,19 @@ export default function FooterMobile() {
         </div>
 
         <div className="flex flex-col h-20 items-center justify-center px-6 pb-6 pt-2">
-          <button className="bg-primary max-w-[345px] w-full h-12 rounded-[40px] text-white font-medium text-lg">
-            Your basket • 1 Item
+          <button
+            className="bg-primary max-w-[345px] w-full h-12 rounded-[40px] text-white font-medium text-lg"
+            onClick={openModal}
+          >
+            Your basket • 1 allergy
           </button>
         </div>
       </footer>
-      <Modal isOpen={isOpen} onClose={openModal}>
+      <Modal
+        isOpen={isOpen && isMobile}
+        onClose={openModal}
+        modalFooter={<FooterBasketCheckout />}
+      >
         <Basket />
       </Modal>
     </>

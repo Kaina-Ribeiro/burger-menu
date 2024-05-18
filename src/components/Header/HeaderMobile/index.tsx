@@ -1,4 +1,4 @@
-import { classNames } from '@/utils/classNames';
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface IHeaderMobileProps {
@@ -13,16 +13,21 @@ export default function HeaderMobile({
   const currentPath = { ...navigation.find((p) => p.path === pathName) };
 
   return (
-    <nav className="flex h-16">
-      <Link
-        className={classNames(
-          'relative h-full flex items-center text-white justify-center',
-        )}
-        key={currentPath.path}
-        href={currentPath.path || ''}
-      >
-        {currentPath.name}
+    <nav className="relative flex items-center justify-center w-full py-[18px]">
+      <Link key={currentPath.path} href={currentPath.path || ''}>
+        <h1 className="font-medium text-lg text-white p-0 m-0 hover:opacity-80">
+          {currentPath.name}
+        </h1>
       </Link>
+
+      <button className="absolute right-0 hover:opacity-80">
+        <Image
+          src="/images/icons/header-hamburger.svg"
+          width={16}
+          height={16}
+          alt="hamburger-icon"
+        />
+      </button>
     </nav>
   );
 }
