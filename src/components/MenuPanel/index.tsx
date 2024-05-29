@@ -30,19 +30,27 @@ export default function MenuPanel({ menu }: MenuPanelProps) {
 
   return (
     <>
-      {filteredItems && filteredItems.length > 0 ? (
+      {searchString ? (
         <div className="flex flex-col md:max-w-xl w-full bg-white md:shadow-md md:py-5">
-          {filteredItems.map((item) => (
-            <MenuItem
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              description={item.description ?? ''}
-              price={item.price}
-              modifiers={item?.modifiers}
-              image={item?.images?.[0].image}
-            />
-          ))}
+          {filteredItems.length > 0 ? (
+            <>
+              {filteredItems.map((item) => (
+                <MenuItem
+                  key={item.id}
+                  id={item.id}
+                  name={item.name}
+                  description={item.description ?? ''}
+                  price={item.price}
+                  modifiers={item?.modifiers}
+                  image={item?.images?.[0].image}
+                />
+              ))}
+            </>
+          ) : (
+            <h1 className="font-medium text-lg text-black-100 md:font-semibold text-center p-4">
+              Ops! Não encontramos nenhum produto com esse nome.
+            </h1>
+          )}
         </div>
       ) : (
         <div className="flex flex-col md:max-w-xl w-full bg-white gap-14 md:shadow-md md:py-5">
