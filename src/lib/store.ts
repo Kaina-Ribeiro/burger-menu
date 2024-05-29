@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import cartSlice from './features/cart/cartSlice';
 import appSlice from './features/app/appSlice';
 import menuSlice from './features/menu/menuSlice';
+import searchSlice from './features/search/searchSlice';
 
 export function makeStore() {
   return configureStore({
@@ -9,6 +10,7 @@ export function makeStore() {
       app: appSlice,
       cart: cartSlice,
       menu: menuSlice,
+      search: searchSlice,
     }),
   });
 }
